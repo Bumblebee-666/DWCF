@@ -58,8 +58,12 @@ def get_arguments():
     parser.add_argument('--ks_eval_resize', default=256, type=int,
                         help='Resize size used before deterministic KineticSound evaluation crops')
     # ===== KS 相对 baseline（3）的关键新增 end: 多视角评估开关 =====
-    parser.add_argument('--audio_path', default='/data/Lab105/Datasets/CREMA-D/CREMAD/AudioWAV/', type=str)
-    parser.add_argument('--visual_path', default='/data/Lab105/Datasets/CREMA-D/CREMAD/', type=str)
+    parser.add_argument('--cremad_root', default='./data/CREMA-D', type=str,
+                        help='CREMA-D root containing the CREMAD split directory')
+    parser.add_argument('--audio_path', default='./data/CREMA-D/CREMAD/AudioWAV/', type=str)
+    parser.add_argument('--visual_path', default='./data/CREMA-D/CREMAD/', type=str)
+    parser.add_argument('--ks_data_root', default='./data/KineticSound', type=str,
+                        help='Kinetics-Sounds root containing split lists, spectrograms and frames')
 
     parser.add_argument('--batch_size', default=64, type=int)
     parser.add_argument('--epochs', default=50, type=int)

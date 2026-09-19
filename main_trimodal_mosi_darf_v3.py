@@ -69,7 +69,7 @@ def get_arguments():
                         choices=['MOSEI', 'MOSI'])
     parser.add_argument('--modulation', default='Ours', type=str,
                         choices=['Normal', 'OGM', 'Ours'])
-    parser.add_argument('--data_path', default='/data/Lab105/Datasets/CMU-MOSI/Processed', type=str)
+    parser.add_argument('--data_path', default='./data/CMU-MOSI/Processed', type=str)
     parser.add_argument('--dataset_name', default='unaligned_50', type=str)
     parser.add_argument('--trimodal_loss_protocol', default='paper', type=str,
                         choices=['paper', 'legacy'],
@@ -197,16 +197,14 @@ def resolve_paper_like_trimodal_chain(args):
 
     说明：
     - 当前仓库历史上混入过多份 MOSI 处理结果；
-    - 当前已经确认可稳定复现到论文附近的链路，是服务器
-      /data/Lab105/Datasets/CMU-MOSI/Processed 下的
-      unaligned_50.pkl（768/5/20 + regression_labels/classification_labels）。
+    - 推荐使用 data/CMU-MOSI/Processed 下的 unaligned_50.pkl；
+    - 特征维度为 768/5/20，并包含 regression_labels/classification_labels。
     """
     if (
         args.dataset == 'MOSI'
-        and args.data_path == '/data/Lab105/Datasets/CMU-MOSI/Processed'
+        and os.path.basename(os.path.normpath(args.data_path)) == 'Processed'
         and args.dataset_name == 'unaligned_50'
     ):
-        args.data_path = '/data/Lab105/Datasets/CMU-MOSI/Processed'
         args.dataset_name = 'unaligned_50'
         args.text_dim = 768
         args.audio_dim = 5
